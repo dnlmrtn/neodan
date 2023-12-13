@@ -27,7 +27,6 @@ return require('packer').startup(function(use)
 		  "MunifTanjim/nui.nvim",
 	  },
   })
+  use('theprimeagen/harpoon')
 
   end)
-
-
