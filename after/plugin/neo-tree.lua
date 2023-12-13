@@ -7,13 +7,6 @@ require("neo-tree").setup({
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
         sort_case_insensitive = false, -- used when sorting files and directories in the tree
         sort_function = nil , -- use a custom function for sorting files and directories in the tree 
-        -- sort_function = function (a,b)
-        --       if a.type == b.type then
-        --           return a.path > b.path
-        --       else
-        --           return a.type > b.type
-        --       end
-        --   end , -- this sorts files and directories descendantly
         default_component_configs = {
           container = {
             enable_character_fade = true
@@ -155,30 +148,19 @@ require("neo-tree").setup({
         filesystem = {
           filtered_items = {
             visible = false, -- when true, they will just be displayed differently than normal items
-            hide_dotfiles = true,
-            hide_gitignored = true,
-            hide_hidden = true, -- only works on Windows for hidden files/directories
+            hide_dotfiles = false,
+            hide_gitignored = false,
             hide_by_name = {
               --"node_modules"
             },
             hide_by_pattern = { -- uses glob style patterns
-              --"*.meta",
-              --"*/src/*/tsconfig.json",
             },
             always_show = { -- remains visible even if other settings would normally hide it
               --".gitignored",
             },
-            never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
-              --".DS_Store",
-              --"thumbs.db"
-            },
-            never_show_by_pattern = { -- uses glob style patterns
-              --".null-ls_*",
-            },
           },
           follow_current_file = {
-            enabled = false, -- This will find and focus the file in the active buffer every time
-            --               -- the current file is changed while the tree is open.
+            enabled = true, -- Find and focus the file in the active buffer every time
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
           group_empty_dirs = false, -- when true, empty folders will be grouped together
@@ -194,7 +176,6 @@ require("neo-tree").setup({
               ["<bs>"] = "navigate_up",
               ["."] = "set_root",
               ["H"] = "toggle_hidden",
-              ["/"] = "fuzzy_finder",
               ["D"] = "fuzzy_finder_directory",
               ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
               -- ["D"] = "fuzzy_sorter_directory",
@@ -210,12 +191,6 @@ require("neo-tree").setup({
               ["on"] = { "order_by_name", nowait = false },
               ["os"] = { "order_by_size", nowait = false },
               ["ot"] = { "order_by_type", nowait = false },
-            },
-            fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
-              ["<down>"] = "move_cursor_down",
-              ["<C-n>"] = "move_cursor_down",
-              ["<up>"] = "move_cursor_up",
-              ["<C-p>"] = "move_cursor_up",
             },
           },
 
